@@ -43,7 +43,7 @@ public class LoginServlet extends HttpServlet {
 			HttpSession session = request.getSession();
 			System.out.println(user.getLogin());
 			session.setAttribute(Constant.USER, user);
-			ServletUtilite.jump(Constant.MAIN_PAGE, request, response);
+			ServletUtilite.jump(Constant.TASKS_SERVLET, request, response);
 		}catch(UserIncorrectException e){
 			ServletUtilite.jumpError(Constant.ERROR_KEY_WHEN_REGISTERED_USER,Constant.LOGIN_PAGE,request, response);
 			
