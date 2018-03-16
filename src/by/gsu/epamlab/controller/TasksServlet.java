@@ -16,16 +16,24 @@ import by.gsu.epamlab.utilits.TasksDAOFactory;
 
 public class TasksServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	
+	@Override
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	  doGet(request, response);
+	}
 
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	    final User user = (User) request.getSession().getAttribute(Constant.USER);
 	    if(user == null){
+	      System.out.println(user);
 	      ServletUtilite.jump(Constant.LOGIN_PAGE, request, response);
-	    }  
+	    } 
+	    System.out.println(user);
 	    try {
           IDAOTaskImplementation tasksSource = TasksDAOFactory.getTasksDAO("db");
           List<Tasks> tasksList = tasksSource.getTasksByUser(user);
+          System.out.println(tasksList);
           request.setAttribute(Constant.TASKS, tasksList);
           ServletUtilite.jump(Constant.MAIN_PAGE, request, response);
         } catch (DAOException e) {

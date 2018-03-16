@@ -9,11 +9,17 @@ import java.util.Objects;
 import by.gsu.epamlab.beans.Tasks;
 import by.gsu.epamlab.beans.User;
 import by.gsu.epamlab.connectionDB.ConnectionSingleton;
-import by.gsu.epamlab.controller.ServletUtilite;
 import by.gsu.epamlab.exception.DAOException;
+import by.gsu.epamlab.utilits.TasksDAOFactory;
 
 public class DBTasksDAO implements IDAOTaskImplementation {  
   private final Connection connection;
+  
+//  public static void main(String [] args) {
+//    ConnectionSingleton.setParameterInDB("com.mysql.jdbc.Driver", "jdbc:mysql://localhost:3306/eeproject", "root", "root");
+//    IDAOTaskImplementation dao = new DBTasksDAO();
+//    System.out.println(dao.getTasksByUser(new User("artem", "lol")));
+//  }
 
   public DBTasksDAO() {
     this.connection = ConnectionSingleton.getConnection();
@@ -40,7 +46,7 @@ public class DBTasksDAO implements IDAOTaskImplementation {
           .createStatement()
           .executeQuery(getQueryByUser(user));
       while(rs.next()){
-        userTasks.add(ServletUtilite.getTasksByField(user, rs.getDate("dateCreate"), rs.getDate("dateModified"), 
+        userTasks.add(TasksDAOFactory.getTasksFromFactory(user, rs.getDate("dateCreate"), rs.getDate("dateModified"), 
             rs.getString("header"), rs.getString("description"), rs.getBoolean("description"))); 
       }
       return  userTasks;      

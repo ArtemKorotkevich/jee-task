@@ -39,6 +39,6 @@
   </servlet>
   <servlet-mapping>
   <servlet-name>tasksServlet</servlet-name>
-  <url-pattern>/Tasks</url-pattern>
+  <url-pattern>/tasksServlet</url-pattern>
   </servlet-mapping>
 </web-app>

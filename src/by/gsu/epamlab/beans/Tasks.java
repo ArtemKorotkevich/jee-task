@@ -15,48 +15,54 @@ public class Tasks {
     return user;
   }
 
-  public void setUser(User user) {
+  public Tasks setUser(User user) {
     this.user = user;
+    return this;
   }
   
   public Date getDateCreate() {
     return dateCreate;
   }
  
-  public void setDateCreate(Date dateCreate) {
+  public Tasks setDateCreate(Date dateCreate) {
     this.dateCreate = dateCreate;
+    return this;
   }
 
   public Date getDateModified() {
     return dateModified;
   }
 
-  public void setDateModified(Date dateModifait) {
+  public Tasks setDateModified(Date dateModifait) {
     this.dateModified = dateModifait;
+    return this;
   }
 
   public String getHeader() {
     return header;
   }
 
-  public void setHeader(String hader) {
+  public Tasks setHeader(String hader) {
     this.header = hader;
+    return this;
   }
 
   public String getDescription() {
     return description;
   }
   
-  public void setDescription(String description) {
+  public Tasks setDescription(String description) {
     this.description = description;
+    return this;
   }
 
   public boolean isReport() {
     return report;
   }
   
-  public void setReport(boolean report) {
+  public Tasks setReport(boolean report) {
     this.report = report;
+    return this;
   }
 
   public Tasks() {
