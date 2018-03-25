@@ -21,6 +21,7 @@ import by.gsu.epamlab.exception.UserIncorrectException;
 
 public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	
 	public void init(ServletConfig config) throws ServletException {
 		ConnectionSingleton.setParameterInDB("com.mysql.jdbc.Driver", "jdbc:mysql://localhost:3306/eeproject", "root", "root");
 	}
@@ -31,14 +32,14 @@ public class LoginServlet extends HttpServlet {
 
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String login = request.getParameter("login");
+	  String login = request.getParameter("login");
 		String pass = request.getParameter("pass");
 		
 		UserDAO userDAO = UserDAOFactory.getUserDAO("db");
 		
 		try{
 			System.out.println(login + pass);
-			User user = userDAO.getUser(login, pass);
+			User user = userDAO.getUser( login, pass);
 			
 			HttpSession session = request.getSession();
 			System.out.println(user.getLogin());

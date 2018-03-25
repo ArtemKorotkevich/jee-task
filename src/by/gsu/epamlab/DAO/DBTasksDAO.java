@@ -1,6 +1,7 @@
 package by.gsu.epamlab.DAO;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -14,12 +15,12 @@ import by.gsu.epamlab.utilits.TasksDAOFactory;
 
 public class DBTasksDAO implements IDAOTaskImplementation {  
   private final Connection connection;
-  
-//  public static void main(String [] args) {
-//    ConnectionSingleton.setParameterInDB("com.mysql.jdbc.Driver", "jdbc:mysql://localhost:3306/eeproject", "root", "root");
-//    IDAOTaskImplementation dao = new DBTasksDAO();
-//    System.out.println(dao.getTasksByUser(new User("artem", "lol")));
-//  }
+
+  //  public static void main(String [] args) {
+  //    ConnectionSingleton.setParameterInDB("com.mysql.jdbc.Driver", "jdbc:mysql://localhost:3306/eeproject", "root", "root");
+  //    IDAOTaskImplementation dao = new DBTasksDAO();
+  //    System.out.println(dao.getTasksByUser(new User("artem", "lol")));
+  //  }
 
   public DBTasksDAO() {
     this.connection = ConnectionSingleton.getConnection();
@@ -61,4 +62,25 @@ public class DBTasksDAO implements IDAOTaskImplementation {
     }
   }
 
+  @Override
+  public boolean addTasks(Tasks tasks) throws DAOException {
+    String InsertQeryForTask = "insert into eeproject.tasks (UserId, dateCreate ,header,description)values(?,?,?,?);";
+    PreparedStatement ps = null;
+    try{
+      ps = ConnectionSingleton.getConnection().prepareStatement(InsertQeryForTask);
+      synchronized (ps) {
+        ps.setInt(1, tasks.getUser().getUserId());
+        System.out.println(tasks.getDateCreate());
+        ps.setDate(2, tasks.getDateCreate());
+        System.out.println(tasks.getHeader());
+        ps.setString(3, tasks.getHeader());
+        System.out.println(tasks.getDescription());
+        ps.setString(4, tasks.getDescription());
+        return ps.execute();
+      }
+    }catch(SQLException e){
+      throw new DAOException(e);
+
+    }
+  }
 }

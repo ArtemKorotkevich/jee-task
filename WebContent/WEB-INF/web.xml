@@ -2,9 +2,10 @@
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" id="WebApp_ID" version="3.1">
   <display-name>JEEProjectEPAM</display-name>
   <welcome-file-list>
-    <welcome-file>register.jsp</welcome-file>
     <welcome-file>login.jsp</welcome-file>
+    <welcome-file>register.jsp</welcome-file>
     <welcome-file>mainPage.jsp</welcome-file>
+    <welcome-file>addTasks.jsp</welcome-file>
     <welcome-file>index.jsp</welcome-file>
   </welcome-file-list>
   <servlet>
@@ -23,7 +24,6 @@
     <servlet-name>login</servlet-name>
     <url-pattern>/Login</url-pattern>
   </servlet-mapping>
-  
   <servlet>
     <servlet-name>logOut</servlet-name>
     <servlet-class>by.gsu.epamlab.controller.LogOutServlet</servlet-class>
@@ -32,13 +32,28 @@
     <servlet-name>logOut</servlet-name>
     <url-pattern>/logOut</url-pattern>
   </servlet-mapping>
-  
   <servlet>
-  <servlet-name>tasksServlet</servlet-name>
-  <servlet-class>by.gsu.epamlab.controller.TasksServlet</servlet-class>
+    <servlet-name>tasksServlet</servlet-name>
+    <servlet-class>by.gsu.epamlab.controller.TasksServlet</servlet-class>
   </servlet>
   <servlet-mapping>
-  <servlet-name>tasksServlet</servlet-name>
-  <url-pattern>/tasksServlet</url-pattern>
+    <servlet-name>tasksServlet</servlet-name>
+    <url-pattern>/tasksServlet</url-pattern>
+  </servlet-mapping>
+  <filter>
+    <filter-name>LoginFilter</filter-name>
+    <filter-class>by.gsu.epamlab.filter.LoginFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>LoginFilter</filter-name>
+    <url-pattern>/LoginServlet/AadTasksServlet</url-pattern>
+  </filter-mapping>
+  <servlet>
+  <servlet-name>AddTasksServlet</servlet-name>
+  <servlet-class>by.gsu.epamlab.controller.AadTasksServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  <servlet-name>AddTasksServlet</servlet-name>
+  <url-pattern>/addTasks</url-pattern>
   </servlet-mapping>
 </web-app>

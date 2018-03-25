@@ -46,8 +46,8 @@ public class RAMUserDAO implements UserDAO {
 	
 	public RAMUserDAO (){
 		super();
-		userList.put("admin", new InternalUser(new User("admin", "admin@gmail.com"), "admin"));
-		userList.put("guest", new InternalUser(new User("guest", "guest@gmail.com"), "guest"));
+		userList.put("admin", new InternalUser(new User(1, "admin", "admin@gmail.com"), "admin"));
+		userList.put("guest", new InternalUser(new User(2, "guest", "guest@gmail.com"), "guest"));
 	}
 	
 	@Override

@@ -7,7 +7,19 @@
 <title>Main Page</title>
 </head>
 <body>
-Hello world
+<jsp:include page = "index.jsp"/>          
+        <div class="heders" style="margin-bottom: 0px; color: white; background-color: #4aa1f3;">
+	<h2 class= "text-center" style="font-size: 50px; font-weight:600;">Task by User </h2>
+</div>
+<div class="tasks" style="margin-bottom: 0px; color: white; background-color: #4aa1f3;">
+<form action="tasksServlet" class="row form-group form-inline" id="rowDiv">
+<h4>user name: ${user.login}</h4>
+<h4> your tasks: ${tasks.get(0)}</h4>
+<h3><input type= "button" value = "add task" onclick='location.href = "addTasks.jsp"'></h3>
+</form>
+
+		
+</div>
 
 </body>
 </html>

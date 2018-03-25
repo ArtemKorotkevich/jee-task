@@ -5,6 +5,7 @@ public class Constant {
 	 public static final String PASSWORD = "pass";
 	 public static final String EMAIL = "Email";
 	 
+	 
 	 public static final String USER = "user";
 	 public static final String TASKS = "tasks";
 	 public static final String CHARACTER_ENCODING = "UTF-8";
@@ -16,6 +17,6 @@ public class Constant {
 	 public static final String INDEX_PAGE = "index.jsp";
 	 public static final String TASKS_SERVLET = "/tasksServlet";
 	 public static final String MAIN_PAGE = "mainPage.jsp";
-	 public static final String LOG_OUT = "";
+	 public static final String LOG_OUT = "/logOut";
 
 }

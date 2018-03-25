@@ -8,7 +8,7 @@
 </head>
 <body>
 <a href= "login.jsp"> login </a> |  
-<a href= "logout.jsp"> Logout </a> |  
+<a href= "/logOut"> Logout </a> |  
 <a href= "register.jsp"> Regestration </a>  
 
 </body>
