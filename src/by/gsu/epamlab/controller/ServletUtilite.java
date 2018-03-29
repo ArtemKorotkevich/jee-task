@@ -6,10 +6,14 @@ import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.Date;
+import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import by.gsu.epamlab.beans.Tasks;
 import by.gsu.epamlab.beans.User;
 
@@ -52,6 +56,5 @@ public class ServletUtilite {
 	   Tasks tasks = new Tasks(dateCreate, dateModified, header, description, report);
 	   
 	   return tasks;
-	 }
-	 
+	 }	 
 }

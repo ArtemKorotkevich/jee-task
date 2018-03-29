@@ -14,7 +14,16 @@
 <div class="tasks" style="margin-bottom: 0px; color: white; background-color: #4aa1f3;">
 <form action="tasksServlet" class="row form-group form-inline" id="rowDiv">
 <h4>user name: ${user.login}</h4>
-<h4> your tasks: ${tasks.get(0)}</h4>
+<h4> your tasks: 
+<input type= "button" value = "Today" onclick='location.href = "Today.jsp"'>
+<input type= "button" value = "Tomorrow" onclick='location.href = "Tomorrow.jsp"'>
+<input type= "button" value = "Someday" onclick='location.href = "Someday.jsp"'>
+<input type= "button" value = "Fixed" onclick='location.href = "Fixed.jsp"'>
+<input type= "button" value = "Recycle Bin" onclick='location.href = "Recycle Bin.jsp"'></h4>
+
+
+
+	
 <h3><input type= "button" value = "add task" onclick='location.href = "addTasks.jsp"'></h3>
 </form>
 

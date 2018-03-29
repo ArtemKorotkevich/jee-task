@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import com.google.gson.Gson;
 import by.gsu.epamlab.beans.Tasks;
 import by.gsu.epamlab.beans.User;
 import by.gsu.epamlab.connectionDB.ConnectionSingleton;
@@ -15,13 +16,15 @@ import by.gsu.epamlab.utilits.TasksDAOFactory;
 
 public class DBTasksDAO implements IDAOTaskImplementation {  
   private final Connection connection;
+  private static final Object LOCK = new Object();
+//  private static final Gson GSON = new Gson();
 
   //  public static void main(String [] args) {
   //    ConnectionSingleton.setParameterInDB("com.mysql.jdbc.Driver", "jdbc:mysql://localhost:3306/eeproject", "root", "root");
   //    IDAOTaskImplementation dao = new DBTasksDAO();
   //    System.out.println(dao.getTasksByUser(new User("artem", "lol")));
   //  }
-
+ 
   public DBTasksDAO() {
     this.connection = ConnectionSingleton.getConnection();
   }
@@ -50,6 +53,9 @@ public class DBTasksDAO implements IDAOTaskImplementation {
         userTasks.add(TasksDAOFactory.getTasksFromFactory(user, rs.getDate("dateCreate"), rs.getDate("dateModified"), 
             rs.getString("header"), rs.getString("description"), rs.getBoolean("description"))); 
       }
+//      String json = GSON.toJson(userTasks);
+//      System.out.println(json);
+      
       return  userTasks;      
     } catch (SQLException e){
       throw new DAOException(e);
@@ -68,7 +74,7 @@ public class DBTasksDAO implements IDAOTaskImplementation {
     PreparedStatement ps = null;
     try{
       ps = ConnectionSingleton.getConnection().prepareStatement(InsertQeryForTask);
-      synchronized (ps) {
+      synchronized (LOCK) {
         ps.setInt(1, tasks.getUser().getUserId());
         System.out.println(tasks.getDateCreate());
         ps.setDate(2, tasks.getDateCreate());

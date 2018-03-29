@@ -6,6 +6,9 @@
     <welcome-file>register.jsp</welcome-file>
     <welcome-file>mainPage.jsp</welcome-file>
     <welcome-file>addTasks.jsp</welcome-file>
+    <welcome-file>Today.jsp</welcome-file>
+    <welcome-file>Someday.jsp</welcome-file>
+    <welcome-file>Tomorrow.jsp</welcome-file>
     <welcome-file>index.jsp</welcome-file>
   </welcome-file-list>
   <servlet>
