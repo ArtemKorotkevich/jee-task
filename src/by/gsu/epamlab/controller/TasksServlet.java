@@ -1,14 +1,12 @@
 package by.gsu.epamlab.controller;
 
 import java.io.IOException;
-import java.sql.Date;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import com.google.gson.Gson;
-import com.sun.org.glassfish.external.arc.Stability;
+
 import by.gsu.epamlab.DAO.IDAOTaskImplementation;
 import by.gsu.epamlab.beans.Constant;
 import by.gsu.epamlab.beans.Tasks;
@@ -18,31 +16,31 @@ import by.gsu.epamlab.utilits.TasksDAOFactory;
 
 
 public class TasksServlet extends HttpServlet {
-	private static final long serialVersionUID = 1L;
-    //private static final Gson GSON = new Gson();  
+  private static final long serialVersionUID = 1L;
+//  private static final Gson GSON = new Gson();  
 
-	
-	@Override
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	  doGet(request, response);
-	}
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	  final User user = (User) request.getSession().getAttribute(Constant.USER);
-	    if(user == null){
-	      System.out.println(user);
-	      ServletUtilite.jump(Constant.LOGIN_PAGE, request, response);
-	    } 
-	    System.out.println(user);
-	    try {
-          IDAOTaskImplementation tasksSource = TasksDAOFactory.getTasksDAO("db");
-          List<Tasks> tasksList = tasksSource.getTasksByUser(user);
-//          String tasks = GSON.toJson(tasksList);
-          System.out.println(tasksList);
-          request.setAttribute(Constant.TASKS, tasksList);
-          ServletUtilite.jump(Constant.TODAY, request, response);
-        } catch (DAOException e) {
-          ServletUtilite.jumpError(Constant.ERROR_KEY_TASK, Constant.MAIN_PAGE, request, response);
-        }
-	}
+  @Override
+  protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    doGet(request, response);
+  }
+
+  protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    final User user = (User) request.getSession().getAttribute(Constant.USER);
+    if(user == null){
+      System.out.println(user);
+      ServletUtilite.jump(Constant.LOGIN_PAGE, request, response);
+    } 
+    System.out.println(user);
+    try {
+      IDAOTaskImplementation tasksSource = TasksDAOFactory.getTasksDAO("db");
+      List<Tasks> tasksList = tasksSource.getTasksByUser(user);
+//      String tasks = GSON.toJson(tasksList);
+//       System.out.println(tasksList);
+      request.setAttribute(Constant.TASKS, tasksList);
+      ServletUtilite.jump(Constant.MAIN_PAGE, request, response);
+    } catch (DAOException e) {
+      ServletUtilite.jumpError(Constant.ERROR_KEY_TASK, Constant.MAIN_PAGE, request, response);
+    }
+  }
 }

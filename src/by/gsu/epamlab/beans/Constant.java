@@ -18,7 +18,7 @@ public class Constant {
 	 public static final String INDEX_PAGE = "index.jsp";
 	 public static final String TASKS_SERVLET = "/tasksServlet";
 	 public static final String MAIN_PAGE = "mainPage.jsp";
-	 public static final String TODAY = "Today.jsp";
+	 public static final String TODAY = "today.jsp";
 
 	 
 	 public static final String LOG_OUT = "/logOut";

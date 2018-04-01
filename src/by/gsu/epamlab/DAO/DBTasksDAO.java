@@ -4,10 +4,10 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import com.google.gson.Gson;
 import by.gsu.epamlab.beans.Tasks;
 import by.gsu.epamlab.beans.User;
 import by.gsu.epamlab.connectionDB.ConnectionSingleton;
@@ -35,7 +35,8 @@ public class DBTasksDAO implements IDAOTaskImplementation {
     }
     return  "SELECT * FROM eeproject.tasks "
     + "WHERE UserId = (SELECT UserId FROM eeproject.user "
-    + "WHERE login = '" + user.getLogin().trim() + "');";
+    + "WHERE login = '" + user.getLogin().trim() + "')"
+        + "AND dateCreate = '"+ LocalDate.now() + "'";
   }
 
   @Override
@@ -51,7 +52,7 @@ public class DBTasksDAO implements IDAOTaskImplementation {
           .executeQuery(getQueryByUser(user));
       while(rs.next()){
         userTasks.add(TasksDAOFactory.getTasksFromFactory(user, rs.getDate("dateCreate"), rs.getDate("dateModified"), 
-            rs.getString("header"), rs.getString("description"), rs.getBoolean("description"))); 
+            rs.getString("header"), rs.getString("description"), rs.getBoolean("report"))); 
       }
 //      String json = GSON.toJson(userTasks);
 //      System.out.println(json);
