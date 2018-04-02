@@ -8,15 +8,15 @@
 <title>Your tasks today</title>
 </head>
 <body>
-<jsp:include page="index.jsp" />
-<div class="heders"
+	<jsp:include page="index.jsp" />
+	<div class="heders"
 		style="margin-bottom: 0px; color: white; background-color: #4aa1f3;">
 		<h2 class="text-center" style="font-size: 50px; font-weight: 600;">Task
 			by Today</h2>
 	</div>
 	<div class="tasks"
 		style="margin-bottom: 0px; color: white; background-color: #4aa1f3;">
-		<form action="TodayServlet" class="row form-group form-inline"
+		<form action="TodayServlet" class="row form-group"
 			id="rowDiv">
 			<table>
 				<thead>

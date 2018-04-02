@@ -54,11 +54,27 @@
     <url-pattern>/addTasks</url-pattern>
   </servlet-mapping>
   <servlet>
-  <servlet-name>TodayServlet</servlet-name>
-  <servlet-class>by.gsu.epamlab.controller.TodayServlet</servlet-class>
+    <servlet-name>TodayServlet</servlet-name>
+    <servlet-class>by.gsu.epamlab.controller.TodayServlet</servlet-class>
   </servlet>
   <servlet-mapping>
-  <servlet-name>TodayServlet</servlet-name>
-  <url-pattern>/today</url-pattern>
+    <servlet-name>TodayServlet</servlet-name>
+    <url-pattern>/today</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>TomorrowServlet</servlet-name>
+    <servlet-class>by.gsu.epamlab.controller.TomorrowServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>TomorrowServlet</servlet-name>
+    <url-pattern>/tomorrow</url-pattern>
+  </servlet-mapping>
+    <servlet>
+    <servlet-name>SomedayServlet</servlet-name>
+    <servlet-class>by.gsu.epamlab.controller.SomedayServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SomedayServlet</servlet-name>
+    <url-pattern>/someday</url-pattern>
   </servlet-mapping>
 </web-app>

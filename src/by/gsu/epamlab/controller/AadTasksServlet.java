@@ -24,7 +24,7 @@ public class AadTasksServlet extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
   public void init(ServletConfig config) throws ServletException {
-    ConnectionSingleton.setParameterInDB("com.mysql.jdbc.Driver", "jdbc:mysql://localhost:3306/eeproject", "root", "root");
+    ConnectionSingleton.setParameterInDB("com.mysql.jdbc.Driver", "jdbc:mysql://localhost:3306/eeproject?autoReconnect=true&useSSL=false", "root", "root");
   }
 
   protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

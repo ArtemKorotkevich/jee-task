@@ -23,14 +23,14 @@
 			<h4>
 				your tasks: <input type="button" value="Today"
 					onclick='location.href = "today"'> <input type="button"
-					value="Tomorrow" onclick='location.href = "Tomorrow.jsp"'>
-				<input type="button" value="Someday"
-					onclick='location.href = "Someday.jsp"'> <input
+					value="Tomorrow" onclick='location.href = "tomorrow"'> <input
+					type="button" value="Someday"
+					onclick='location.href = "someday"'> <input
 					type="button" value="Fixed" onclick='location.href = "Fixed.jsp"'>
 				<input type="button" value="Recycle Bin"
 					onclick='location.href = "Recycle Bin.jsp"'>
 			</h4>
-			
+
 
 			<h3>
 				<input type="button" value="add task"

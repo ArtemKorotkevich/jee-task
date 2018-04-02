@@ -14,8 +14,7 @@ import by.gsu.epamlab.exception.DAOException;
 import by.gsu.epamlab.utilits.TasksDAOFactory;
 
 
-
-public class TodayServlet extends HttpServlet {
+public class TomorrowServlet extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
 
@@ -23,10 +22,10 @@ public class TodayServlet extends HttpServlet {
     final User user = (User) request.getSession().getAttribute(Constant.USER);
     try{
       IDAOTaskImplementation tasksSource = TasksDAOFactory.getTasksDAO("db");
-      List<Tasks> tasksList = tasksSource.getTasksByUser(user);
+      List<Tasks> tasksList = tasksSource.getTasksByTasksTommorow(user);
       System.out.println(tasksList);
       request.setAttribute(Constant.TASKS, tasksList);
-      ServletUtilite.jump(Constant.TODAY, request, response);
+      ServletUtilite.jump(Constant.TOMORROW, request, response);
     } catch (DAOException e) {
       ServletUtilite.jumpError(Constant.ERROR_KEY_TASK, Constant.MAIN_PAGE, request, response);
     }
@@ -36,6 +35,4 @@ public class TodayServlet extends HttpServlet {
   protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     doGet(request, response);
   }
-
-
 }

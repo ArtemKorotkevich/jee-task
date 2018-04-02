@@ -36,7 +36,7 @@ public class TasksServlet extends HttpServlet {
       IDAOTaskImplementation tasksSource = TasksDAOFactory.getTasksDAO("db");
       List<Tasks> tasksList = tasksSource.getTasksByUser(user);
 //      String tasks = GSON.toJson(tasksList);
-//       System.out.println(tasksList);
+      System.out.println(tasksList);
       request.setAttribute(Constant.TASKS, tasksList);
       ServletUtilite.jump(Constant.MAIN_PAGE, request, response);
     } catch (DAOException e) {
