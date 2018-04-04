@@ -16,7 +16,7 @@
 	</div>
 	<div class="tasks"
 		style="margin-bottom: 0px; color: white; background-color: #4aa1f3;">
-		<form action="TodayServlet" class="row form-group"
+		<form action="tasks?section=today" class="row form-group"
 			id="rowDiv">
 			<table>
 				<thead>

@@ -4,14 +4,13 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.LocalDate;
-import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import by.gsu.epamlab.beans.Tasks;
 import by.gsu.epamlab.beans.User;
 import by.gsu.epamlab.connectionDB.ConnectionSingleton;
+import by.gsu.epamlab.enums.SectionDayEnum;
 import by.gsu.epamlab.exception.DAOException;
 import by.gsu.epamlab.utilits.TasksDAOFactory;
 
@@ -29,41 +28,9 @@ public class DBTasksDAO implements IDAOTaskImplementation {
     this.connection = ConnectionSingleton.getConnection();
   }
 
-  private static String getQueryByUser(final User user) {
-    if (Objects.isNull(user)) {
-      throw new IllegalArgumentException("User is null");
-    }
-    return  "SELECT * FROM eeproject.tasks "
-    + "WHERE UserId = (SELECT UserId FROM eeproject.user "
-    + "WHERE login = '" + user.getLogin().trim() + "')"
-    + "AND dateCreate = '"+ LocalDate.now() + "'";
-  }
-
-  private static String getQueryByTasksTommorow(final User user) {
-    if (Objects.isNull(user)) {
-      throw new IllegalArgumentException("User is null"); 
-    }
-    LocalDate today = LocalDate.now();
-    LocalDate tomorrow = today.plus(1,ChronoUnit.DAYS);
-    return  "SELECT * FROM eeproject.tasks "
-    + "WHERE UserId = (SELECT UserId FROM eeproject.user "
-    + "WHERE login = '" + user.getLogin().trim() + "')"
-    + "AND dateCreate = '"+ tomorrow + "'";
-  }
-  
-  private static String getQueryByTasksSomeday(final User user) {
-    if (Objects.isNull(user)) {
-      throw new IllegalArgumentException("User is null"); 
-    }
-    LocalDate someday = null;
-    return  "SELECT * FROM eeproject.tasks "
-    + "WHERE UserId = (SELECT UserId FROM eeproject.user "
-    + "WHERE login = '" + user.getLogin().trim() + "')"
-    + "AND dateCreate = '"+ someday + "'";
-  }
 
   @Override
-  public List<Tasks>  getTasksByUser(final User user) {
+  public List<Tasks>  getTasksByUser(final User user, SectionDayEnum sectionDayEnum) {
     if(Objects.isNull(user)){
       throw new IllegalArgumentException("User is null");
     }
@@ -72,7 +39,7 @@ public class DBTasksDAO implements IDAOTaskImplementation {
     try{
       rs = connection
           .createStatement()
-          .executeQuery(getQueryByUser(user));
+          .executeQuery(sectionDayEnum.getQuerery(user));
       while(rs.next()){
         userTasks.add(TasksDAOFactory.getTasksFromFactory(user, rs.getDate("dateCreate"), rs.getDate("dateModified"), 
             rs.getString("header"), rs.getString("description"), rs.getBoolean("report"))); 
@@ -90,59 +57,7 @@ public class DBTasksDAO implements IDAOTaskImplementation {
     }
   }
 
-  @Override 
-  public List<Tasks>  getTasksByTasksTommorow(final User user) {
-    if(Objects.isNull(user)){
-      throw new IllegalArgumentException("User is null");
-    }
-    ResultSet rs = null;
-    List<Tasks> userTasks = new ArrayList<>();
-    try{
-      rs = connection
-          .createStatement()
-          .executeQuery(getQueryByTasksTommorow(user));
-      while(rs.next()){
-        userTasks.add(TasksDAOFactory.getTasksFromFactory(user, rs.getDate("dateCreate"), rs.getDate("dateModified"), 
-            rs.getString("header"), rs.getString("description"), rs.getBoolean("report"))); 
-      }
-      return  userTasks;      
-    } catch (SQLException e){
-      throw new DAOException(e);
-    } finally {
-      try {
-        ConnectionSingleton.closeResultSets(rs);
-      } catch (SQLException e) {
-        throw new DAOException(e);
-      }
-    }
-  }
-  
-  @Override 
-  public List<Tasks>  getTasksByTasksSomeday(final User user) {
-    if(Objects.isNull(user)){
-      throw new IllegalArgumentException("User is null");
-    }
-    ResultSet rs = null;
-    List<Tasks> userTasks = new ArrayList<>();
-    try{
-      rs = connection
-          .createStatement()
-          .executeQuery(getQueryByTasksSomeday(user));
-      while(rs.next()){
-        userTasks.add(TasksDAOFactory.getTasksFromFactory(user, rs.getDate("dateCreate"), rs.getDate("dateModified"), 
-            rs.getString("header"), rs.getString("description"), rs.getBoolean("report"))); 
-      }
-      return  userTasks;      
-    } catch (SQLException e){
-      throw new DAOException(e);
-    } finally {
-      try {
-        ConnectionSingleton.closeResultSets(rs);
-      } catch (SQLException e) {
-        throw new DAOException(e);
-      }
-    }
-  }
+ 
 
   @Override
   public boolean addTasks(Tasks tasks) throws DAOException {

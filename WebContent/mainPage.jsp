@@ -17,18 +17,18 @@
 	</div>
 	<div class="tasks"
 		style="margin-bottom: 0px; color: white; background-color: #4aa1f3;">
-		<form action="tasksServlet" class="row form-group form-inline"
+		<form action="tasks" class="row form-group form-inline"
 			id="rowDiv">
 			<h4>user name: ${user.login}</h4>
 			<h4>
 				your tasks: <input type="button" value="Today"
-					onclick='location.href = "today"'> <input type="button"
-					value="Tomorrow" onclick='location.href = "tomorrow"'> <input
+					onclick='location.href = "tasks?section=today"'> <input type="button"
+					value="Tomorrow" onclick='location.href = "tasks?section=tomorrow"'> <input
 					type="button" value="Someday"
-					onclick='location.href = "someday"'> <input
-					type="button" value="Fixed" onclick='location.href = "Fixed.jsp"'>
+					onclick='location.href = "tasks?section=someday"'> <input
+					type="button" value="Fixed" onclick='location.href = "tasks?section=fixed"'>
 				<input type="button" value="Recycle Bin"
-					onclick='location.href = "Recycle Bin.jsp"'>
+					onclick='location.href = "tasks?section=recycle_bin"'>
 			</h4>
 
 

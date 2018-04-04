@@ -11,13 +11,14 @@ import by.gsu.epamlab.DAO.IDAOTaskImplementation;
 import by.gsu.epamlab.beans.Constant;
 import by.gsu.epamlab.beans.Tasks;
 import by.gsu.epamlab.beans.User;
+import by.gsu.epamlab.enums.SectionDayEnum;
 import by.gsu.epamlab.exception.DAOException;
 import by.gsu.epamlab.utilits.TasksDAOFactory;
 
 
 public class TasksServlet extends HttpServlet {
   private static final long serialVersionUID = 1L;
-//  private static final Gson GSON = new Gson();  
+ 
 
 
   @Override
@@ -34,8 +35,7 @@ public class TasksServlet extends HttpServlet {
     System.out.println(user);
     try {
       IDAOTaskImplementation tasksSource = TasksDAOFactory.getTasksDAO("db");
-      List<Tasks> tasksList = tasksSource.getTasksByUser(user);
-//      String tasks = GSON.toJson(tasksList);
+      List<Tasks> tasksList = tasksSource.getTasksByUser(user, SectionDayEnum.getValueByParam(request));
       System.out.println(tasksList);
       request.setAttribute(Constant.TASKS, tasksList);
       ServletUtilite.jump(Constant.MAIN_PAGE, request, response);

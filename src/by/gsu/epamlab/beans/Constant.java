@@ -1,5 +1,8 @@
 package by.gsu.epamlab.beans;
 
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
+
 public class Constant {
   public static final String LOGIN = "login";
   public static final String PASSWORD = "pass";
@@ -16,12 +19,13 @@ public class Constant {
   public static final String REGISTER_PAGE = "register.jsp"; 
   public static final String LOGIN_PAGE = "login.jsp";
   public static final String INDEX_PAGE = "index.jsp";
-  public static final String TASKS_SERVLET = "/tasksServlet";
+  public static final String TASKS_SERVLET = "/tasks";
   public static final String MAIN_PAGE = "mainPage.jsp";
   public static final String TODAY = "today.jsp";
   public static final String TOMORROW = "tomorrow.jsp";
   public static final String SOMEDAY = "someday.jsp";
-
+  
+ 
 
 
 
