@@ -1,10 +1,8 @@
 package by.gsu.epamlab.controller;
 
 import java.io.IOException;
-import java.sql.Date;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
+import java.time.LocalDate;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -42,10 +40,11 @@ public class AadTasksServlet extends HttpServlet {
   }
  
   private  static  Tasks getNewTasks(HttpServletRequest request) throws ParseException{ 
-    java.util.Date date = new SimpleDateFormat("yyyy-MM-dd").parse(request.getParameter("dateCreate"));
+         
     return new Tasks()
         .setUser((User)request.getSession(false).getAttribute(Constant.USER))
-        .setDateCreate(new java.sql.Date(date.getTime()))
+        .setDateCreate(LocalDate.parse(request.getParameter("dateCreate")))
+        .setDateModified(LocalDate.parse(request.getParameter("dateCreate")))
         .setHeader(request.getParameter("header"))
         .setDescription(request.getParameter("description"));
 

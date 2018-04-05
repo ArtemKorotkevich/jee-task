@@ -1,6 +1,7 @@
 package by.gsu.epamlab.DAO;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -41,8 +42,8 @@ public class DBTasksDAO implements IDAOTaskImplementation {
           .createStatement()
           .executeQuery(sectionDayEnum.getQuerery(user));
       while(rs.next()){
-        userTasks.add(TasksDAOFactory.getTasksFromFactory(user, rs.getDate("dateCreate"), rs.getDate("dateModified"), 
-            rs.getString("header"), rs.getString("description"), rs.getBoolean("report"))); 
+        userTasks.add(TasksDAOFactory.getTasksFromFactory(user, rs.getDate("dateCreate").toLocalDate(), rs.getDate("dateModified").toLocalDate(), 
+            rs.getString("header"), rs.getString("description"), rs.getBoolean("report"), rs.getBoolean("recycle_Bin"))); 
       }
 
       return  userTasks;      
@@ -61,18 +62,22 @@ public class DBTasksDAO implements IDAOTaskImplementation {
 
   @Override
   public boolean addTasks(Tasks tasks) throws DAOException {
-    String InsertQeryForTask = "insert into eeproject.tasks (UserId, dateCreate ,header,description)values(?,?,?,?);";
+    String InsertQeryForTask = "insert into eeproject.tasks (UserId, dateCreate, dateModified,"
+        + " header, description)values(?,?,?,?,?);";
     PreparedStatement ps = null;
     try{
       ps = ConnectionSingleton.getConnection().prepareStatement(InsertQeryForTask);
       synchronized (LOCK) {
+        System.out.println(tasks.getUser().getUserId());
         ps.setInt(1, tasks.getUser().getUserId());
         System.out.println(tasks.getDateCreate());
-        ps.setDate(2, tasks.getDateCreate());
+        ps.setDate(2, Date.valueOf(tasks.getDateCreate()));
+        System.out.println(tasks.getDateModified());
+        ps.setDate(3, Date.valueOf(tasks.getDateModified()));
         System.out.println(tasks.getHeader());
-        ps.setString(3, tasks.getHeader());
+        ps.setString(4, tasks.getHeader());
         System.out.println(tasks.getDescription());
-        ps.setString(4, tasks.getDescription());
+        ps.setString(5, tasks.getDescription());
         return ps.execute();
       }
     }catch(SQLException e){

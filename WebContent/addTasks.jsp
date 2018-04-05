@@ -15,8 +15,8 @@
 <div>
 <h4> date </h4>
 <input type="date" name="dateCreate" /><br/>
-
-
+<h4> date </h4>
+<input type="date" name="dateModified" /><br/>
 <h4>heading</h4>
 <input type="text" name="header" /><br/>
 <h4>description</h4>

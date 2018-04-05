@@ -42,7 +42,7 @@
 						<th>report</th>
 					</tr>
 				</thead>
-				<tbody>
+				<tbody> </br>
 					<c:forEach var="tasks" items="${tasks}">
 						<td></td>
 						<td>${tasks.dateCreate}</td>
@@ -50,7 +50,7 @@
 						<td>${tasks.description}</td>
 						<td>${tasks.report}</td>
 					</c:forEach>
-				</tbody>
+				</tbody></br>
 			</table>
 	</div>
 

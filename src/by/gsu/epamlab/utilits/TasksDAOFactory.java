@@ -1,6 +1,6 @@
 package by.gsu.epamlab.utilits;
 
-import java.sql.Date;
+import java.time.LocalDate;
 import by.gsu.epamlab.DAO.DBTasksDAO;
 import by.gsu.epamlab.DAO.IDAOTaskImplementation;
 import by.gsu.epamlab.beans.Tasks;
@@ -17,15 +17,15 @@ public class TasksDAOFactory {
     }
   }
 
-  public static Tasks getTasksFromFactory(User user, Date dateCreate,Date dateModified,String header,String description,boolean report){
+  public static Tasks getTasksFromFactory(User user, LocalDate dateCreate, LocalDate dateModified,String header,String description,boolean report,boolean recycle_Bin){
     return new Tasks()
         .setUser(user)
         .setDateCreate(dateCreate)
         .setDateModified(dateModified)
         .setHeader(header)
         .setDescription(description)
-        .setReport(report);
+        .setReport(report)
+        .setRecycleBin(recycle_Bin);    
   }
-
 }
 

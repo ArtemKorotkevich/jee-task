@@ -14,7 +14,8 @@ public enum SectionDayEnum {
       return "SELECT * FROM eeproject.tasks "
           + "WHERE UserId = (SELECT UserId FROM eeproject.user "
           + "WHERE login = '" + user.getLogin().trim() + "')"
-          + "AND dateCreate = '"+ LocalDate.now() + "'";
+          + "AND dateCreate = '"+ LocalDate.now() + "' "
+              + "AND recycle_Bin = 0";
     }
   },TOMORROW {
     @Override
@@ -24,7 +25,8 @@ public enum SectionDayEnum {
       return  "SELECT * FROM eeproject.tasks "
       + "WHERE UserId = (SELECT UserId FROM eeproject.user "
       + "WHERE login = '" + user.getLogin().trim() + "')"
-      + "AND dateCreate = '"+ tomorrow + "'";
+      + "AND dateCreate = '"+ tomorrow + "'"
+          + "AND recycle_Bin = 0";
     }
   },SOMEDAY {
     @Override
@@ -32,7 +34,7 @@ public enum SectionDayEnum {
       return  "SELECT * FROM eeproject.tasks "
           + "WHERE UserId = (SELECT UserId FROM eeproject.user "
           + "WHERE login = '" + user.getLogin().trim() + "')"
-          + "AND dateModified ";
+          + "AND dateModified AND recycle_Bin = 0";
     }
   },FIXED {
     @Override
@@ -40,7 +42,7 @@ public enum SectionDayEnum {
       return  "SELECT * FROM eeproject.tasks "
           + "WHERE UserId = (SELECT UserId FROM eeproject.user "
           + "WHERE login = '" + user.getLogin().trim() + "')"
-          + "AND report = 1";
+          + "AND report = 1 AND recycle_Bin = 0";
     }
   },RECYCLE_BIN {
     @Override
