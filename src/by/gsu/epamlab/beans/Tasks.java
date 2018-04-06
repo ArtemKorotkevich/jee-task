@@ -5,6 +5,7 @@ import java.time.LocalDate;
 
 public class Tasks {
   private User user;
+  private int idtasks;
   private LocalDate dateCreate;
   private LocalDate dateModified;
   private String header;
@@ -22,6 +23,16 @@ public class Tasks {
     return this;
   }
 
+  public int getIdtasks() {
+    return idtasks;
+  }
+
+
+  public Tasks setIdtasks(int idtasks) {
+    this.idtasks = idtasks;
+    return this;
+  }
+  
   public LocalDate getDateCreate() {
     return dateCreate;
   }
@@ -83,9 +94,10 @@ public class Tasks {
 
   }
 
-  public Tasks(LocalDate dateCreate, LocalDate dateModified, String header, String description,
+  public Tasks(int idtasks, LocalDate dateCreate, LocalDate dateModified, String header, String description,
       boolean report, boolean recycle_Bin) {
     super();
+    this.idtasks = idtasks;
     this.dateCreate = dateCreate;
     this.dateModified = dateModified;
     this.header = header;
@@ -96,11 +108,13 @@ public class Tasks {
 
   @Override
   public String toString() {
-    return "Tasks [user=" + user + ", dateCreate=" + dateCreate + ", dateModified=" + dateModified
+    return "Tasks [user=" + user + ", tasksid=" + idtasks + ",dateCreate=" + dateCreate + ", dateModified=" + dateModified
         + ", header=" + header + ", description=" + description + ", report=" + report
         + ", recycle_Bin=" + recycleBin + "]";
   }
 
+
+  
 
 
 

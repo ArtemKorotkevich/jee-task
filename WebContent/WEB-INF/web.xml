@@ -53,4 +53,12 @@
     <servlet-name>AddTasksServlet</servlet-name>
     <url-pattern>/addTasks</url-pattern>
   </servlet-mapping>
+   <servlet>
+    <servlet-name>DeleteTasks</servlet-name>
+    <servlet-class>by.gsu.epamlab.controller.DeleteTasks</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DeleteTasks</servlet-name>
+    <url-pattern>/delete</url-pattern>
+  </servlet-mapping>
 </web-app>

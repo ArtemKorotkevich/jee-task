@@ -17,46 +17,52 @@
 	</div>
 	<div class="tasks"
 		style="margin-bottom: 0px; color: white; background-color: #4aa1f3;">
-		<form action="tasks" class="row form-group form-inline"
+		<form method="POST" action="delete" class="row form-group"
 			id="rowDiv">
 			<h4>user name: ${user.login}</h4>
 			<h4>
 				your tasks: <input type="button" value="Today"
-					onclick='location.href = "tasks?section=today"'> <input type="button"
-					value="Tomorrow" onclick='location.href = "tasks?section=tomorrow"'> <input
+					onclick='location.href = "tasks?section=today"'> <input
+					type="button" value="Tomorrow"
+					onclick='location.href = "tasks?section=tomorrow"'> <input
 					type="button" value="Someday"
 					onclick='location.href = "tasks?section=someday"'> <input
-					type="button" value="Fixed" onclick='location.href = "tasks?section=fixed"'>
-				<input type="button" value="Recycle Bin"
+					type="button" value="Fixed"
+					onclick='location.href = "tasks?section=fixed"'> <input
+					type="button" value="Recycle Bin"
 					onclick='location.href = "tasks?section=recycle_bin"'>
 			</h4>
-<div class="tasks"
-		style="margin-bottom: 0px; color: white; background-color: #4aa1f3;">
-			<table>
-				<thead>
-					<tr>
-						<th>#</th>
-						<th>date Create</th>
-						<th>Caption</th>
-						<th>description</th>
-						<th>report</th>
-					</tr>
-				</thead>
-				<tbody> </br>
-					<c:forEach var="tasks" items="${tasks}">
-						<td></td>
-						<td>${tasks.dateCreate}</td>
-						<td>${tasks.header}</td>
-						<td>${tasks.description}</td>
-						<td>${tasks.report}</td>
-					</c:forEach>
-				</tbody></br>
-			</table>
-	</div>
+			<div class="tasks"
+				style="margin-bottom: 0px; color: white; background-color: #4aa1f3;">
+				<table>
+					<thead>
+						<tr>
+							<th>#</th>
+							<th>date Create</th>
+							<th>Caption</th>
+							<th>description</th>
+							<th>report</th>
+						</tr>
+					</thead>
+					<tbody>
+						<c:forEach var="tasks" items="${tasks}">
+							<td><input type="checkbox" name="task-${tasks.idtasks}"></td>
+							<td></td>
+							<td>${tasks.dateCreate}</td>
+							<td>${tasks.header}</td>
+							<td>${tasks.description}</td>
+							<td>${tasks.report}</td>
+						</c:forEach>
+					</tbody>
+				</table>
+			</div>
 
 			<h3>
 				<input type="button" value="add task"
 					onclick='location.href = "addTasks.jsp"'>
+			</h3>
+			<h3>
+				<input type="submit" value="Submit">
 			</h3>
 		</form>
 

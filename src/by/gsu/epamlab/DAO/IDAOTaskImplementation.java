@@ -9,5 +9,6 @@ import by.gsu.epamlab.exception.DAOException;
 public interface IDAOTaskImplementation {
   public List<Tasks>  getTasksByUser(User user,SectionDayEnum sectionDayEnum)throws DAOException;
   public boolean addTasks(Tasks tasks) throws DAOException;
+  public boolean deleteTaks(List<Integer> list) throws DAOException;
   
 }

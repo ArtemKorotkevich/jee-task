@@ -17,8 +17,9 @@ public class TasksDAOFactory {
     }
   }
 
-  public static Tasks getTasksFromFactory(User user, LocalDate dateCreate, LocalDate dateModified,String header,String description,boolean report,boolean recycle_Bin){
+  public static Tasks getTasksFromFactory(User user, int idtasks, LocalDate dateCreate, LocalDate dateModified,String header,String description,boolean report,boolean recycle_Bin){
     return new Tasks()
+        .setIdtasks(idtasks)
         .setUser(user)
         .setDateCreate(dateCreate)
         .setDateModified(dateModified)

@@ -49,7 +49,7 @@ public class ServletUtilite {
       throw new RuntimeException(e);
     }  
   }
-  public static Tasks getTasksByField(User user,LocalDate dateCreate, LocalDate dateModified,String header,String description,boolean report, boolean recycle_Bin){
-    return new Tasks(dateCreate, dateModified, header, description, report, recycle_Bin);
+  public static Tasks getTasksByField(User user,int idtasks, LocalDate dateCreate, LocalDate dateModified,String header,String description,boolean report, boolean recycle_Bin){
+    return new Tasks(idtasks, dateCreate, dateModified, header, description, report, recycle_Bin);
   }	 
 }

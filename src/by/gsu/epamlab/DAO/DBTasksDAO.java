@@ -42,7 +42,7 @@ public class DBTasksDAO implements IDAOTaskImplementation {
           .createStatement()
           .executeQuery(sectionDayEnum.getQuerery(user));
       while(rs.next()){
-        userTasks.add(TasksDAOFactory.getTasksFromFactory(user, rs.getDate("dateCreate").toLocalDate(), rs.getDate("dateModified").toLocalDate(), 
+        userTasks.add(TasksDAOFactory.getTasksFromFactory(user, rs.getInt("idtasks"), rs.getDate("dateCreate").toLocalDate(), rs.getDate("dateModified").toLocalDate(), 
             rs.getString("header"), rs.getString("description"), rs.getBoolean("report"), rs.getBoolean("recycle_Bin"))); 
       }
 
@@ -83,6 +83,24 @@ public class DBTasksDAO implements IDAOTaskImplementation {
     }catch(SQLException e){
       throw new DAOException(e);
 
+    }
+  }
+
+
+  @Override
+  public boolean deleteTaks(List<Integer> list) throws DAOException {
+    String  deleteQeryForTasks = "UPDATE eeproject.tasks SET recycle_Bin = 1 WHERE idtasks = ?;";
+    PreparedStatement ps = null;
+    try{
+      ps = ConnectionSingleton.getConnection().prepareStatement(deleteQeryForTasks);
+      
+      synchronized (LOCK) {
+          ps.setInt(1, new Tasks().getIdtasks());
+           return ps.execute();
+      }
+     
+    }catch(SQLException e){
+      throw new DAOException(e);
     }
   }
 }
