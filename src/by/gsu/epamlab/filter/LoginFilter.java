@@ -13,16 +13,14 @@ import javax.servlet.http.HttpSession;
 import by.gsu.epamlab.beans.Constant;
 import by.gsu.epamlab.beans.User;
 
-
 public class LoginFilter implements Filter {
 
   public LoginFilter() {
   }
 
-
   public void destroy() {
-
   }
+
   public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
     HttpServletRequest httpRequest = (HttpServletRequest) request;
     HttpSession session = httpRequest.getSession();
@@ -38,5 +36,4 @@ public class LoginFilter implements Filter {
 
   public void init(FilterConfig fConfig) throws ServletException {
   }
-
 }

@@ -43,7 +43,7 @@
   </filter>
   <filter-mapping>
     <filter-name>LoginFilter</filter-name>
-    <url-pattern>/LoginServlet/AadTasksServlet/tasks</url-pattern>
+    <url-pattern>/LoginServlet/AadTasksServlet</url-pattern>
   </filter-mapping>
   <servlet>
     <servlet-name>AddTasksServlet</servlet-name>
@@ -53,12 +53,28 @@
     <servlet-name>AddTasksServlet</servlet-name>
     <url-pattern>/addTasks</url-pattern>
   </servlet-mapping>
-   <servlet>
+  <servlet>
     <servlet-name>DeleteTasks</servlet-name>
     <servlet-class>by.gsu.epamlab.controller.DeleteTasks</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>DeleteTasks</servlet-name>
     <url-pattern>/delete</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>ExcutedTasksServlet</servlet-name>
+    <servlet-class>by.gsu.epamlab.controller.ExecutedTasksServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ExcutedTasksServlet</servlet-name>
+    <url-pattern>/done</url-pattern>
+  </servlet-mapping>
+   <servlet>
+    <servlet-name>DeleteTasksInDatabase</servlet-name>
+    <servlet-class>by.gsu.epamlab.controller.DeleteTasksInDatabase</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DeleteTasksInDatabase</servlet-name>
+    <url-pattern>/deletes</url-pattern>
   </servlet-mapping>
 </web-app>

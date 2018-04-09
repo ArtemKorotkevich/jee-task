@@ -15,11 +15,8 @@ import by.gsu.epamlab.enums.SectionDayEnum;
 import by.gsu.epamlab.exception.DAOException;
 import by.gsu.epamlab.utilits.TasksDAOFactory;
 
-
 public class TasksServlet extends HttpServlet {
   private static final long serialVersionUID = 1L;
- 
-
 
   @Override
   protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -37,6 +34,7 @@ public class TasksServlet extends HttpServlet {
       IDAOTaskImplementation tasksSource = TasksDAOFactory.getTasksDAO("db");
       List<Tasks> tasksList = tasksSource.getTasksByUser(user, SectionDayEnum.getValueByParam(request));
       System.out.println(tasksList);
+      request.setAttribute("section",SectionDayEnum.getValueByParam(request).name());
       request.setAttribute(Constant.TASKS, tasksList);
       ServletUtilite.jump(Constant.MAIN_PAGE, request, response);
     } catch (DAOException e) {

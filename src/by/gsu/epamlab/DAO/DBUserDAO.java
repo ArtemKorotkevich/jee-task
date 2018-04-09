@@ -40,8 +40,6 @@ public class DBUserDAO implements UserDAO {
     }
   }
 
-
-
   @Override
   public boolean setUser(User user, String pass){
     String InsertQeryForUser = "insert into eeproject.user"
@@ -120,5 +118,4 @@ public class DBUserDAO implements UserDAO {
       throw new UserIncorrectException(login);
     }
   }
-
 }

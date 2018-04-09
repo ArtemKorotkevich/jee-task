@@ -1,7 +1,5 @@
 package by.gsu.epamlab.beans;
 
-import java.time.LocalDate;
-import java.time.temporal.ChronoUnit;
 
 public class Constant {
   public static final String LOGIN = "login";

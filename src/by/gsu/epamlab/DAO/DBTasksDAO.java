@@ -19,16 +19,9 @@ public class DBTasksDAO implements IDAOTaskImplementation {
   private final Connection connection;
   private static final Object LOCK = new Object();
 
-  //  public static void main(String [] args) {
-  //    ConnectionSingleton.setParameterInDB("com.mysql.jdbc.Driver", "jdbc:mysql://localhost:3306/eeproject", "root", "root");
-  //    IDAOTaskImplementation dao = new DBTasksDAO();
-  //    System.out.println(dao.getTasksByUser(new User("artem", "lol")));
-  //  }
-
   public DBTasksDAO() {
     this.connection = ConnectionSingleton.getConnection();
   }
-
 
   @Override
   public List<Tasks>  getTasksByUser(final User user, SectionDayEnum sectionDayEnum) {
@@ -58,8 +51,6 @@ public class DBTasksDAO implements IDAOTaskImplementation {
     }
   }
 
- 
-
   @Override
   public boolean addTasks(Tasks tasks) throws DAOException {
     String InsertQeryForTask = "insert into eeproject.tasks (UserId, dateCreate, dateModified,"
@@ -86,21 +77,56 @@ public class DBTasksDAO implements IDAOTaskImplementation {
     }
   }
 
-
   @Override
-  public boolean deleteTaks(List<Integer> list) throws DAOException {
+  public void deleteTaks(List<Integer> list) throws DAOException {
     String  deleteQeryForTasks = "UPDATE eeproject.tasks SET recycle_Bin = 1 WHERE idtasks = ?;";
     PreparedStatement ps = null;
     try{
       ps = ConnectionSingleton.getConnection().prepareStatement(deleteQeryForTasks);
-      
-      synchronized (LOCK) {
-          ps.setInt(1, new Tasks().getIdtasks());
-           return ps.execute();
+      for(int ids : list){
+        synchronized (LOCK) {
+          ps.setInt(1, ids);
+          ps.execute();
+        }
       }
-     
     }catch(SQLException e){
       throw new DAOException(e);
+    }
+  }
+
+  @Override
+  public void executedTasks(List<Integer> list) throws DAOException {
+    String  deleteQeryForTasks = "UPDATE eeproject.tasks SET report = 1 WHERE idtasks = ?;";
+    PreparedStatement ps = null;
+    try{
+      ps = ConnectionSingleton.getConnection().prepareStatement(deleteQeryForTasks);
+      for(int ids : list){
+        synchronized (LOCK) {
+          ps.setInt(1, ids);
+          ps.execute();
+        }
+      }
+    }catch(SQLException e){
+      throw new DAOException(e);
+
+    }
+  }
+
+  @Override
+  public void deleteTaskInDB(List<Integer> list) throws DAOException {
+    String  deleteQeryForTasks = "DELETE FROM `eeproject`.`tasks` WHERE `idtasks`=?;";
+    PreparedStatement ps = null;
+    try{
+      ps = ConnectionSingleton.getConnection().prepareStatement(deleteQeryForTasks);
+      for(int ids : list){
+        synchronized (LOCK) {
+          ps.setInt(1, ids);
+          ps.execute();
+        }
+      }
+    }catch(SQLException e){
+      throw new DAOException(e);
+
     }
   }
 }

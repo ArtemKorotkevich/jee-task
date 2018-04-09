@@ -15,9 +15,6 @@ import by.gsu.epamlab.connectionDB.ConnectionSingleton;
 import by.gsu.epamlab.exception.DAOException;
 import by.gsu.epamlab.utilits.TasksDAOFactory;
 
-
-
-
 public class AadTasksServlet extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
@@ -38,9 +35,9 @@ public class AadTasksServlet extends HttpServlet {
       e.printStackTrace();
     }
   }
- 
+
   private  static  Tasks getNewTasks(HttpServletRequest request) throws ParseException{ 
-         
+
     return new Tasks()
         .setUser((User)request.getSession(false).getAttribute(Constant.USER))
         .setDateCreate(LocalDate.parse(request.getParameter("dateCreate")))

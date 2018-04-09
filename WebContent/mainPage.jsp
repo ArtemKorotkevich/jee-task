@@ -15,10 +15,10 @@
 		<h2 class="text-center" style="font-size: 50px; font-weight: 600;">Task
 			by User</h2>
 	</div>
+		
 	<div class="tasks"
 		style="margin-bottom: 0px; color: white; background-color: #4aa1f3;">
-		<form method="POST" action="delete" class="row form-group"
-			id="rowDiv">
+		<form method="POST"    id="rowDiv">
 			<h4>user name: ${user.login}</h4>
 			<h4>
 				your tasks: <input type="button" value="Today"
@@ -28,46 +28,58 @@
 					type="button" value="Someday"
 					onclick='location.href = "tasks?section=someday"'> <input
 					type="button" value="Fixed"
-					onclick='location.href = "tasks?section=fixed"'> <input
+					onclick='location.href = "tasks?section=fixed"'>
+					 <input
 					type="button" value="Recycle Bin"
 					onclick='location.href = "tasks?section=recycle_bin"'>
 			</h4>
 			<div class="tasks"
-				style="margin-bottom: 0px; color: white; background-color: #4aa1f3;">
-				<table>
+				style="display: block; margin-bottom: 0px; color: white; background-color: #4aa1f3;">
+				<table width="100%" cellpadding="5">
 					<thead>
 						<tr>
-							<th>#</th>
-							<th>date Create</th>
-							<th>Caption</th>
-							<th>description</th>
-							<th>report</th>
+							<th align="left">#</th>
+							<th align="left">date Create</th>
+							<th align="left">Caption</th>
+							<th align="left">description</th>
+							<th align="left">report</th>
 						</tr>
 					</thead>
 					<tbody>
 						<c:forEach var="tasks" items="${tasks}">
-							<td><input type="checkbox" name="task-${tasks.idtasks}"></td>
-							<td></td>
-							<td>${tasks.dateCreate}</td>
-							<td>${tasks.header}</td>
-							<td>${tasks.description}</td>
-							<td>${tasks.report}</td>
+							<tr>
+								<td><input type="checkbox" name="task-${tasks.idtasks}"></td>
+								<td align="left">${tasks.dateCreate}</td>
+								<td align="left">${tasks.header}</td>
+								<td align="left">${tasks.description}</td>
+								<td align="left">${tasks.report}</td>
+							</tr>
 						</c:forEach>
 					</tbody>
 				</table>
 			</div>
-
+		
+		<c:if test="${section == 'RECYCLE_BIN'}">
+		<c:set var="Display" value="1" />
+		</c:if>
+		<c:choose>
+			<c:when test="${Display == 1}">
+        <input type = "submit" value = "Delet in Recycle bin"  formaction ="deletes"/>
+    </c:when>
+    <c:otherwise>
+       <input type="button" value="add task"
+					onclick='location.href = "addTasks.jsp"'/>
 			<h3>
-				<input type="button" value="add task"
-					onclick='location.href = "addTasks.jsp"'>
+				<input type="submit" value="done" formaction = "done"/>
 			</h3>
+			
 			<h3>
-				<input type="submit" value="Submit">
-			</h3>
+		<input type="submit" value="delete" formaction = "delete"/>		
+	</h3>
+    </c:otherwise>      
+</c:choose>
+		
 		</form>
-
-
-
 	</div>
 
 </body>

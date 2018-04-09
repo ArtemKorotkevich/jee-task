@@ -12,32 +12,30 @@ import com.sun.org.apache.xerces.internal.impl.xpath.regex.ParseException;
 import by.gsu.epamlab.beans.Constant;
 import by.gsu.epamlab.utilits.TasksDAOFactory;
 
-
 public class DeleteTasks extends HttpServlet {
-	private static final long serialVersionUID = 1L;
+  private static final long serialVersionUID = 1L;
 
-	
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	  try{
-	    TasksDAOFactory
-	    .getTasksDAO("db")
-	    .deleteTaks(getTasksIds(request));
-	    response.sendRedirect(Constant.MAIN_PAGE);
-	  }catch(ParseException e){
-	    e.printStackTrace();
-	  }
-	}
-	
-	private static List<Integer> getTasksIds(HttpServletRequest request) throws ParseException{
-	    List<Integer> ids = new ArrayList<>();
-	    Enumeration<String> params = request.getParameterNames();
-	    while (params.hasMoreElements()) {
-	      String param = params.nextElement();
-	      if (param.startsWith("task-")) {
-	        ids.add(Integer.parseInt(param.split("-")[1]));	        
-	      }
-	    }
-	    return ids;
-	}
+  protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    try{
+      TasksDAOFactory
+      .getTasksDAO("db")
+      .deleteTaks(getTasksIds(request));
+      response.sendRedirect(Constant.MAIN_PAGE);
+    }catch(ParseException e){
+      e.printStackTrace();
+    }
+  }
+
+  private static List<Integer> getTasksIds(HttpServletRequest request) throws ParseException{
+    List<Integer> ids = new ArrayList<>();
+    Enumeration<String> params = request.getParameterNames();
+    while (params.hasMoreElements()) {
+      String param = params.nextElement();
+      if (param.startsWith("task-")) {
+        ids.add(Integer.parseInt(param.split("-")[1]));	        
+      }
+    }
+    return ids;
+  }
 
 }

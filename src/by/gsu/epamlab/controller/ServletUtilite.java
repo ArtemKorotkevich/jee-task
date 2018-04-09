@@ -5,7 +5,6 @@ import java.io.UnsupportedEncodingException;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.sql.Date;
 import java.time.LocalDate;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -13,7 +12,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import by.gsu.epamlab.beans.Tasks;
 import by.gsu.epamlab.beans.User;
-
 
 public class ServletUtilite {
   public static void jump(String page, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{

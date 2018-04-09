@@ -1,21 +1,20 @@
 package by.gsu.epamlab.enums;
 
-
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import javax.servlet.http.HttpServletRequest;
 import by.gsu.epamlab.beans.User;
 
-
 public enum SectionDayEnum {
   TODAY {
     @Override
     public String getQuerery(User user) {
+      LocalDate today = LocalDate.now();
       return "SELECT * FROM eeproject.tasks "
           + "WHERE UserId = (SELECT UserId FROM eeproject.user "
           + "WHERE login = '" + user.getLogin().trim() + "')"
-          + "AND dateCreate = '"+ LocalDate.now() + "' "
-              + "AND recycle_Bin = 0";
+          + "AND dateCreate = '"+ today + "' "
+          + "AND recycle_Bin = 0";
     }
   },TOMORROW {
     @Override
@@ -25,16 +24,19 @@ public enum SectionDayEnum {
       return  "SELECT * FROM eeproject.tasks "
       + "WHERE UserId = (SELECT UserId FROM eeproject.user "
       + "WHERE login = '" + user.getLogin().trim() + "')"
-      + "AND dateCreate = '"+ tomorrow + "'"
-          + "AND recycle_Bin = 0";
+      + "AND dateModified = '"+ tomorrow + "'"
+      + "AND recycle_Bin = 0";
     }
   },SOMEDAY {
     @Override
     public String getQuerery(User user) {
+      LocalDate today = LocalDate.now();
+      LocalDate tomorrow = today.plus(1,ChronoUnit.DAYS);
       return  "SELECT * FROM eeproject.tasks "
           + "WHERE UserId = (SELECT UserId FROM eeproject.user "
           + "WHERE login = '" + user.getLogin().trim() + "')"
-          + "AND dateModified AND recycle_Bin = 0";
+          + "AND dateModified > '"+ tomorrow +"' "
+              + " AND recycle_Bin = 0";
     }
   },FIXED {
     @Override
@@ -42,13 +44,15 @@ public enum SectionDayEnum {
       return  "SELECT * FROM eeproject.tasks "
           + "WHERE UserId = (SELECT UserId FROM eeproject.user "
           + "WHERE login = '" + user.getLogin().trim() + "')"
-          + "AND report = 1 AND recycle_Bin = 0";
+              + "AND report = 1 AND recycle_Bin = 0";
     }
   },RECYCLE_BIN {
     @Override
     public String getQuerery(User user) {
-      // TODO Auto-generated method stub
-      return null;
+      return "SELECT * FROM eeproject.tasks "
+          + "WHERE UserId = (SELECT UserId FROM eeproject.user "
+          + "WHERE login = '" + user.getLogin().trim() + "')"
+          + "AND recycle_Bin = 1";
     }
   };
 
