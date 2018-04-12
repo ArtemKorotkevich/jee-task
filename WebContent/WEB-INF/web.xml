@@ -5,6 +5,10 @@
     <welcome-file>login.jsp</welcome-file>
     <welcome-file>today.jsp</welcome-file>
   </welcome-file-list>
+  <context-param>
+    <param-name>tempfile.dir</param-name>
+    <param-value>tmpfiles</param-value>
+  </context-param>
   <servlet>
     <servlet-name>register</servlet-name>
     <servlet-class>by.gsu.epamlab.controller.RegisterServlet</servlet-class>
@@ -69,7 +73,7 @@
     <servlet-name>ExcutedTasksServlet</servlet-name>
     <url-pattern>/done</url-pattern>
   </servlet-mapping>
-   <servlet>
+  <servlet>
     <servlet-name>DeleteTasksInDatabase</servlet-name>
     <servlet-class>by.gsu.epamlab.controller.DeleteTasksInDatabase</servlet-class>
   </servlet>
@@ -77,4 +81,7 @@
     <servlet-name>DeleteTasksInDatabase</servlet-name>
     <url-pattern>/deletes</url-pattern>
   </servlet-mapping>
+   <listener>
+  <listener-class>by.gsu.epamlab.utilits.FileLocationContextListener</listener-class>
+  </listener>
 </web-app>

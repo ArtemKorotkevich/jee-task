@@ -18,7 +18,7 @@
 		
 	<div class="tasks"
 		style="margin-bottom: 0px; color: white; background-color: #4aa1f3;">
-		<form method="POST"    id="rowDiv">
+		<form method="POST"   id="rowDiv" >
 			<h4>user name: ${user.login}</h4>
 			<h4>
 				your tasks: <input type="button" value="Today"
@@ -53,8 +53,12 @@
 								<td align="left">${tasks.header}</td>
 								<td align="left">${tasks.description}</td>
 								<td align="left">${tasks.report}</td>
+								<td><input type="button" value="add file"
+					onclick='location.href = "file.jsp"'/></td>
+						<input type="hidden" name="taskId" value="${tasks.idtasks}" />
 							</tr>
 						</c:forEach>
+						
 					</tbody>
 				</table>
 			</div>
@@ -81,6 +85,11 @@
 		
 		</form>
 	</div>
+	<script type="text/javascript">
+	function onsubmit(e){
+		e.stopPropagation();
+	}
+	</script>
 
 </body>
 </html>

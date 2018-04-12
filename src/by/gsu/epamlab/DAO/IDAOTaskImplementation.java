@@ -12,5 +12,6 @@ public interface IDAOTaskImplementation {
   public void deleteTaks(List<Integer> list) throws DAOException;
   public void executedTasks(List<Integer> list)throws DAOException;
   public void deleteTaskInDB(List<Integer> list)throws DAOException;
+  public void setFileURLForTask(Tasks task)throws DAOException;
 
 }
