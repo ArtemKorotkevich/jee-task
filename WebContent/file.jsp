@@ -7,9 +7,9 @@
 <title>Insert title here</title>
 </head>
 <body>
-<a href= "login.jsp"> login </a> |  
-<a href= "logOut"> Logout </a> |  
-<a href= "register.jsp"> Regestration </a>  
-
+<form action="upload" method="POST" enctype="multipart/form-data">
+<input type = 'file' name = "file"> <input type="submit" >
+	
+</form>
 </body>
 </html>

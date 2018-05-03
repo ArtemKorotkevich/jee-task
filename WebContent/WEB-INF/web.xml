@@ -2,11 +2,13 @@
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" id="WebApp_ID" version="3.1">
   <display-name>JEEProjectEPAM</display-name>
   <welcome-file-list>
-    <welcome-file>register.jsp</welcome-file>
     <welcome-file>login.jsp</welcome-file>
-    <welcome-file>mainPage.jsp</welcome-file>
-    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>today.jsp</welcome-file>
   </welcome-file-list>
+  <context-param>
+    <param-name>tempfile.dir</param-name>
+    <param-value>tmpfiles</param-value>
+  </context-param>
   <servlet>
     <servlet-name>register</servlet-name>
     <servlet-class>by.gsu.epamlab.controller.RegisterServlet</servlet-class>
@@ -23,7 +25,6 @@
     <servlet-name>login</servlet-name>
     <url-pattern>/Login</url-pattern>
   </servlet-mapping>
-  
   <servlet>
     <servlet-name>logOut</servlet-name>
     <servlet-class>by.gsu.epamlab.controller.LogOutServlet</servlet-class>
@@ -32,13 +33,55 @@
     <servlet-name>logOut</servlet-name>
     <url-pattern>/logOut</url-pattern>
   </servlet-mapping>
-  
   <servlet>
-  <servlet-name>tasksServlet</servlet-name>
-  <servlet-class>by.gsu.epamlab.controller.TasksServlet</servlet-class>
+    <servlet-name>tasksServlet</servlet-name>
+    <servlet-class>by.gsu.epamlab.controller.TasksServlet</servlet-class>
   </servlet>
   <servlet-mapping>
-  <servlet-name>tasksServlet</servlet-name>
-  <url-pattern>/Tasks</url-pattern>
+    <servlet-name>tasksServlet</servlet-name>
+    <url-pattern>/tasks</url-pattern>
   </servlet-mapping>
+  <filter>
+    <filter-name>LoginFilter</filter-name>
+    <filter-class>by.gsu.epamlab.filter.LoginFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>LoginFilter</filter-name>
+    <url-pattern>/LoginServlet/AadTasksServlet</url-pattern>
+  </filter-mapping>
+  <servlet>
+    <servlet-name>AddTasksServlet</servlet-name>
+    <servlet-class>by.gsu.epamlab.controller.AadTasksServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AddTasksServlet</servlet-name>
+    <url-pattern>/addTasks</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>DeleteTasks</servlet-name>
+    <servlet-class>by.gsu.epamlab.controller.DeleteTasks</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DeleteTasks</servlet-name>
+    <url-pattern>/delete</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>ExcutedTasksServlet</servlet-name>
+    <servlet-class>by.gsu.epamlab.controller.ExecutedTasksServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ExcutedTasksServlet</servlet-name>
+    <url-pattern>/done</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>DeleteTasksInDatabase</servlet-name>
+    <servlet-class>by.gsu.epamlab.controller.DeleteTasksInDatabase</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DeleteTasksInDatabase</servlet-name>
+    <url-pattern>/deletes</url-pattern>
+  </servlet-mapping>
+   <listener>
+  <listener-class>by.gsu.epamlab.utilits.FileLocationContextListener</listener-class>
+  </listener>
 </web-app>

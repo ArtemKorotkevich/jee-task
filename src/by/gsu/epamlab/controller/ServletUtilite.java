@@ -5,7 +5,7 @@ import java.io.UnsupportedEncodingException;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.sql.Date;
+import java.time.LocalDate;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -13,45 +13,41 @@ import javax.servlet.http.HttpServletResponse;
 import by.gsu.epamlab.beans.Tasks;
 import by.gsu.epamlab.beans.User;
 
-
 public class ServletUtilite {
-	 public static void jump(String page, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
-		RequestDispatcher dispatcher = request.getRequestDispatcher(page); 
-		  if (dispatcher != null){
-		   dispatcher.forward(request, response);
-		  } 
-	 }
-	 
-	 public static void jumpError(String cause, String page, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		 request.setAttribute(cause, cause);
-		 ServletUtilite.jump(page, request, response);
-	 	}
+  public static void jump(String page, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+    RequestDispatcher dispatcher = request.getRequestDispatcher(page); 
+    if (dispatcher != null){
+      dispatcher.forward(request, response);
+    } 
+  }
 
-	 public static String getHashMD5(String str) {
-		 MessageDigest m;
-		 
-		 try {
-		    m = MessageDigest.getInstance("MD5");
-		    m.reset();
-		    m.update(str.getBytes("utf-8"));
-		    String s2 = new BigInteger(1, m.digest()).toString(16);
-		    StringBuilder sb = new StringBuilder(32);
-	    
-		 for (int i = 0, count = 32 - s2.length(); i < count; i++) {
-	     sb.append("0");
-	    }
-	    //return MD5-hash
-	    return sb.append(s2).toString();
-	    
-	   } catch (NoSuchAlgorithmException | UnsupportedEncodingException e) {
-	    System.err.println("Exception in error when generate MD5!");
-	    throw new RuntimeException(e);
-	   }  
-	    }
-	 public static Tasks getTasksByField(User user,Date dateCreate, Date dateModified,String header,String description,boolean report){
-	   Tasks tasks = new Tasks(dateCreate, dateModified, header, description, report);
-	   
-	   return tasks;
-	 }
-	 
+  public static void jumpError(String cause, String page, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    request.setAttribute(cause, cause);
+    ServletUtilite.jump(page, request, response);
+  }
+
+  public static String getHashMD5(String str) {
+    MessageDigest m;
+
+    try {
+      m = MessageDigest.getInstance("MD5");
+      m.reset();
+      m.update(str.getBytes("utf-8"));
+      String s2 = new BigInteger(1, m.digest()).toString(16);
+      StringBuilder sb = new StringBuilder(32);
+
+      for (int i = 0, count = 32 - s2.length(); i < count; i++) {
+        sb.append("0");
+      }
+      //return MD5-hash
+      return sb.append(s2).toString();
+
+    } catch (NoSuchAlgorithmException | UnsupportedEncodingException e) {
+      System.err.println("Exception in error when generate MD5!");
+      throw new RuntimeException(e);
+    }  
+  }
+  public static Tasks getTasksByField(User user,int idtasks, LocalDate dateCreate, LocalDate dateModified,String header,String description,boolean report, boolean recycle_Bin, String URL){
+    return new Tasks(idtasks, dateCreate, dateModified, header, description, report, recycle_Bin, URL);
+  }	 
 }
