@@ -17,8 +17,7 @@ public class ConnectionSingleton {
     if (!isInit){
       connectionToDB = new ConnectionSingleton(driverClass, dbURL, dbUser, dbPass);
       isInit = true;
-    } else{
-    }	
+    } 
   }
 
   public static Connection getConnection(){

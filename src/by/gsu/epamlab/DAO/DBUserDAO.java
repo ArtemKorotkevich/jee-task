@@ -17,7 +17,7 @@ public class DBUserDAO implements UserDAO {
   @Override
   public User getUser(String login, String pass) throws DAOException {
     Connection connection = ConnectionSingleton.getConnection();
-    String query = "select `login`,'Email',`pass` from eeproject.user where login=? ;";
+    String query = "select * from eeproject.user where login=? ;";
     if(checkPass(login, pass)){
       try{
         PreparedStatement statement = connection.prepareStatement(query);
@@ -25,8 +25,9 @@ public class DBUserDAO implements UserDAO {
         ResultSet rs = statement.executeQuery();
         if(rs.next()){
           User user = new User();
-          user.setLogin(rs.getString(1));
-          user.setEmail(rs.getString(2));
+          user.setUserId(rs.getInt(1));
+          user.setLogin(rs.getString(2));
+          user.setEmail(rs.getString(3));
           return user;
         }else{
           throw new NullPointerException("User not faund! ");
@@ -38,8 +39,6 @@ public class DBUserDAO implements UserDAO {
       throw new PasswordIncorrectException(login);
     }
   }
-
-
 
   @Override
   public boolean setUser(User user, String pass){
@@ -119,5 +118,4 @@ public class DBUserDAO implements UserDAO {
       throw new UserIncorrectException(login);
     }
   }
-
 }
